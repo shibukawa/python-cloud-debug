@@ -12,9 +12,7 @@ WORKDIR /opt/app/
 COPY --from=builder /usr/local/lib/python3.7/site-packages /usr/local/lib/python3.7/site-packages
 COPY --from=builder /usr/local/bin/uvicorn /usr/local/bin/uvicorn
 COPY python_cloud_debug /opt/app/
-COPY key.json /opt/app/key.json
 WORKDIR /opt/app/
 
 ENV PYTHONUNBUFFERED=TRUE
-ENV GOOGLE_APPLICATION_CREDENTIALS=/opt/app/key.json
 CMD [ "/bin/sh", "-c", "exec /usr/local/bin/uvicorn --host 0.0.0.0 --port $PORT main:app" ]
